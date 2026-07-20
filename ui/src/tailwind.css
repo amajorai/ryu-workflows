@@ -1,0 +1,127 @@
+/* Self-contained Tailwind v4 entry for the Workflows companion app.
+ *
+ * The sandboxed frame runs under CSP `connect-src 'none'`, so the CSS must be
+ * compiled at build time and inlined (no runtime fetch). We deliberately do NOT
+ * `@import "@ryu/ui/globals.css"` — that file carries repo-wide `@source` globs
+ * (`apps/**`, `packages/ui/**`) + extra deps (tw-animate-css, shadcn) that would
+ * scan the whole monorepo and fight the single-file build. Instead this entry:
+ *   1. pulls in Tailwind and scans ONLY this package's own `src`,
+ *   2. carries a SELF-CONTAINED copy of the design-system semantic-color token
+ *      block (:root + .dark + the `@theme inline` color mapping) so every
+ *      `bg-info` / `text-muted-foreground` / `bg-card` / `border-border` class
+ *      the ported canvas uses resolves to the same value the desktop shows, and
+ *   3. imports React Flow's base.css (positioning/handles) — Tailwind classes on
+ *      the node markup override the visual styling, exactly as the desktop does.
+ *
+ * Keep the token values in sync with `packages/ui/src/styles/globals.css` if the
+ * design system changes them.
+ */
+@import "tailwindcss";
+@import "@xyflow/react/dist/base.css";
+@source "./";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+	--card: oklch(1 0 0);
+	--card-foreground: oklch(0.145 0 0);
+	--popover: var(--muted);
+	--popover-foreground: var(--foreground);
+	--primary: oklch(0.205 0 0);
+	--primary-foreground: oklch(0.985 0 0);
+	--secondary: oklch(0.97 0 0);
+	--secondary-foreground: oklch(0.205 0 0);
+	--muted: oklch(0.97 0 0);
+	--muted-foreground: oklch(0.556 0 0);
+	--accent: oklch(0.97 0 0);
+	--accent-foreground: oklch(0.205 0 0);
+	--destructive: oklch(0.577 0.245 27.325);
+	--success: oklch(0.62 0.17 145);
+	--success-foreground: oklch(0.985 0 0);
+	--warning: oklch(0.75 0.16 75);
+	--warning-foreground: oklch(0.205 0 0);
+	--info: oklch(0.55 0.2 255);
+	--info-foreground: oklch(0.985 0 0);
+	--border: oklch(0.922 0 0);
+	--input: oklch(0.922 0 0);
+	--ring: oklch(0.708 0 0);
+	--radius: 0.625rem;
+	--background: oklch(1 0 0);
+	--foreground: oklch(0.145 0 0);
+	--spacing: 0.25rem;
+}
+
+.dark {
+	--background: oklch(0.145 0 0);
+	--foreground: oklch(0.985 0 0);
+	--card: oklch(0.205 0 0);
+	--card-foreground: oklch(0.985 0 0);
+	--primary: oklch(0.922 0 0);
+	--primary-foreground: oklch(0.205 0 0);
+	--secondary: oklch(0.269 0 0);
+	--secondary-foreground: oklch(0.985 0 0);
+	--muted: oklch(0.269 0 0);
+	--muted-foreground: oklch(0.708 0 0);
+	--accent: oklch(0.269 0 0);
+	--accent-foreground: oklch(0.985 0 0);
+	--destructive: oklch(0.704 0.191 22.216);
+	--success: oklch(0.7 0.15 150);
+	--success-foreground: oklch(0.985 0 0);
+	--warning: oklch(0.8 0.15 80);
+	--warning-foreground: oklch(0.205 0 0);
+	--info: oklch(0.65 0.17 255);
+	--info-foreground: oklch(0.985 0 0);
+	--border: oklch(1 0 0 / 10%);
+	--input: oklch(1 0 0 / 15%);
+	--ring: oklch(0.556 0 0);
+}
+
+@theme inline {
+	--color-ring: var(--ring);
+	--color-input: var(--input);
+	--color-border: var(--border);
+	--color-destructive: var(--destructive);
+	--color-success: var(--success);
+	--color-success-foreground: var(--success-foreground);
+	--color-warning: var(--warning);
+	--color-warning-foreground: var(--warning-foreground);
+	--color-info: var(--info);
+	--color-info-foreground: var(--info-foreground);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-accent: var(--accent);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-muted: var(--muted);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-secondary: var(--secondary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-primary: var(--primary);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-popover: var(--popover);
+	--color-card-foreground: var(--card-foreground);
+	--color-card: var(--card);
+	--color-foreground: var(--foreground);
+	--color-background: var(--background);
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+}
+
+html,
+body,
+#ryu-plugin-root {
+	height: 100%;
+	margin: 0;
+}
+
+body {
+	background: var(--background);
+	color: var(--foreground);
+	font-family:
+		ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	font-size: 14px;
+}
+
+* {
+	border-color: var(--border);
+}
