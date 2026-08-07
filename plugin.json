@@ -1,0 +1,18 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ryu.workflows",
+  "version": "1.0.0",
+  "description": "Workflows: petgraph DAG automation with triggers, durable execution, and a natural-language workflow builder.",
+  "keywords": [
+    "workflows",
+    "automation",
+    "dag",
+    "triggers"
+  ],
+  "extensions": {
+    "com.ryuhq.ryu": {
+      "id": "@ryu/workflows",
+      "displayName": "Workflows"
+    }
+  }
+}
