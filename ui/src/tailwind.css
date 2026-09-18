@@ -1,0 +1,5 @@
+/* workflows companion Tailwind entry. Ryu semantic tokens, base styles, and live-theme defaults come from @ryu/ui/companion-theme.css; this file owns only the app's @source list and domain utilities. */
+@import "tailwindcss";
+@import "@xyflow/react/dist/base.css";
+@import "@ryu/ui/app-ui.css";
+@source "./";
